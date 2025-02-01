@@ -1,6 +1,7 @@
 package com.projects.springshop.service.product;
 
 import com.projects.springshop.exceptions.ProductNotFoundException;
+import com.projects.springshop.exceptions.ResourceNotFoundException;
 import com.projects.springshop.model.Category;
 import com.projects.springshop.model.Product;
 import com.projects.springshop.repository.CategoryRepository;
@@ -47,14 +48,14 @@ public class ProductService implements IProductService {
     @Override
     public Product getProductById(Long id) {
         return productRepository.findById(id)
-                .orElseThrow(()->new ProductNotFoundException("Product not found!"));
+                .orElseThrow(()->new ResourceNotFoundException("Product not found!"));
     }
 
     @Override
     public void deleteProductById(Long id) {
         productRepository.findById(id)
                 .ifPresentOrElse(productRepository::delete,
-                        () -> {throw new ProductNotFoundException("Product not found!");});
+                        () -> {throw new ResourceNotFoundException("Product not found!");});
     }
 
     @Override
@@ -62,7 +63,7 @@ public class ProductService implements IProductService {
         return productRepository.findById(productId)
                 .map(existingProduct -> updateExistingProduct(existingProduct, request))
                 .map(productRepository :: save)
-                .orElseThrow(() -> new ProductNotFoundException("Product not found!"));
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found!"));
     }
 
     private Product updateExistingProduct(Product existingProduct, ProductUpdateRequest request){
