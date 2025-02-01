@@ -6,8 +6,10 @@ import com.projects.springshop.model.Product;
 import com.projects.springshop.request.AddProductRequest;
 import com.projects.springshop.request.ProductUpdateRequest;
 import com.projects.springshop.response.ApiResponse;
+import com.projects.springshop.service.category.ICategoryService;
 import com.projects.springshop.service.product.IProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +23,11 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 @RequestMapping("${api.prefix}/products")
 public class ProductController {
     private final IProductService productService;
+
+    @Autowired
+    public ProductController(IProductService productService) {
+        this.productService = productService;
+    }
 
     @GetMapping("/all")
     public ResponseEntity<ApiResponse> getAllProducts() {

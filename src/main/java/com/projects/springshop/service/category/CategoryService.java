@@ -6,6 +6,7 @@ import com.projects.springshop.model.Category;
 import com.projects.springshop.repository.CategoryRepository;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +16,11 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CategoryService implements ICategoryService{
     private final CategoryRepository categoryRepository;
+
+    @Autowired
+    public CategoryService(CategoryRepository categoryRepository){
+        this.categoryRepository = categoryRepository;
+    }
 
     @Override
     public Category getCategoryById(Long id) {
@@ -34,7 +40,7 @@ public class CategoryService implements ICategoryService{
 
     @Override
     public Category addCategory(Category category) {
-        return Optional.of(category).filter(c -> !categoryRepository.existByName(c.getName()))
+        return Optional.of(category).filter(c -> !categoryRepository.existsByName(c.getName()))
                 .map(categoryRepository :: save)
                 .orElseThrow(() -> new AlreadyExistException(category.getName()+" already exists"));
     }

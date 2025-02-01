@@ -4,9 +4,11 @@ import com.projects.springshop.dto.ImageDto;
 import com.projects.springshop.exceptions.ResourceNotFoundException;
 import com.projects.springshop.model.Image;
 import com.projects.springshop.model.Product;
+import com.projects.springshop.repository.CategoryRepository;
 import com.projects.springshop.repository.ImageRepository;
 import com.projects.springshop.service.product.IProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,6 +23,12 @@ import java.util.List;
 public class ImageService implements IImageService{
     private final ImageRepository imageRepository;
     private final IProductService productService;
+
+    @Autowired
+    public ImageService(ImageRepository imageRepository, IProductService productService) {
+        this.imageRepository = imageRepository;
+        this.productService = productService;
+    }
 
     @Override
     public Image getImageById(Long id) {

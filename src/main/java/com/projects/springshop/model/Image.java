@@ -27,4 +27,35 @@ public class Image {
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
+
+    public Blob getImage() {
+        return this.image;
+    }
+    public String getFileName() {
+        return this.fileName;
+    }
+    public String getFileType() {
+        return this.fileType;
+    }
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+    public void setFileType(String fileType) {
+        this.fileType = fileType;
+    }
+    public void setImage(Blob image){
+        this.image = image;
+    }
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+    public Long getId() {
+        return this.id;
+    }
+    public void setDownloadUrl(String downloadUrl) {
+        this.downloadUrl = downloadUrl;
+    }
+    public String getDownloadUrl() {
+        return this.downloadUrl;
+    }
 }

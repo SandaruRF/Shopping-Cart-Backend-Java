@@ -4,10 +4,12 @@ import com.projects.springshop.dto.ImageDto;
 import com.projects.springshop.exceptions.ResourceNotFoundException;
 import com.projects.springshop.model.Image;
 import com.projects.springshop.response.ApiResponse;
+import com.projects.springshop.service.category.ICategoryService;
 import com.projects.springshop.service.image.IImageService;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.Response;
 import org.hibernate.annotations.NotFound;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -28,6 +30,11 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 @RequestMapping("${api.prefix}/images")
 public class ImageController {
     private final IImageService imageService;
+
+    @Autowired
+    public ImageController(IImageService imageService) {
+        this.imageService = imageService;
+    }
 
     @PostMapping("/upload")
     public ResponseEntity<ApiResponse> saveImages(@RequestParam List<MultipartFile> files, @RequestParam Long productId) {

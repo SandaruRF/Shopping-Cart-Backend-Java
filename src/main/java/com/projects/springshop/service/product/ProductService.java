@@ -9,6 +9,7 @@ import com.projects.springshop.repository.ProductRepository;
 import com.projects.springshop.request.AddProductRequest;
 import com.projects.springshop.request.ProductUpdateRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +20,13 @@ import java.util.Optional;
 public class ProductService implements IProductService {
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
+
+    @Autowired
+    public ProductService (ProductRepository productRepository, CategoryRepository categoryRepository){
+        this.productRepository = productRepository;
+        this.categoryRepository = categoryRepository;
+    }
+
     @Override
     public Product addProduct(AddProductRequest request) {
         // check if the category is found in the DB

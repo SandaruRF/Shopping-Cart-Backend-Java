@@ -17,4 +17,26 @@ public class AddProductRequest {
     private int inventory;
     private String description;
     private Category category;
+
+    public Category getCategory() {
+        return this.category;
+    }
+    public void setCategory(Category category){
+        this.category = category;
+    }
+    public String getName() {
+        return this.name;
+    }
+    public String getBrand() {
+        return this.brand;
+    }
+    public BigDecimal getPrice() {
+        return  this.price;
+    }
+    public int getInventory(){
+        return this.inventory;
+    }
+    public String getDescription() {
+        return this.description;
+    }
 }

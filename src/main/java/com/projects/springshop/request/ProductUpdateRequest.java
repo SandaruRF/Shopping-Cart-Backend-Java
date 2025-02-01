@@ -14,4 +14,23 @@ public class ProductUpdateRequest {
     private int inventory;
     private String description;
     private Category category;
+
+    public String getName() {
+        return this.name;
+    }
+    public String getBrand() {
+        return this.brand;
+    }
+    public BigDecimal getPrice() {
+        return  this.price;
+    }
+    public int getInventory(){
+        return this.inventory;
+    }
+    public String getDescription() {
+        return this.description;
+    }
+    public Category getCategory() {
+        return this.category;
+    }
 }
